@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a7aaa7bb6b9384548b1e290d925e3732
+timeCreated: 1513549857
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - currentState: {fileID: 11400000, guid: 7f9fa1f17e4444c8d997cc87d5a03851, type: 2}
+  - enemyStats: {instanceID: 0}
+  - eyes: {instanceID: 0}
+  - remainState: {fileID: 11400000, guid: af9b5795b1116407596b97be732aca48, type: 2}
+  - navMeshAgent: {instanceID: 0}
+  - tankShooting: {instanceID: 0}
+  - chaseTarget: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
