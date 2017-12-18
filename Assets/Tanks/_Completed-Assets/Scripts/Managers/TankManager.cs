@@ -20,16 +20,17 @@ namespace Complete
         [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the tank when it is created.
         [HideInInspector] public int m_Wins;                    // The number of wins this player has so far.
 		[HideInInspector] public List<Transform> m_WayPointList;
+	[HideInInspector] public List<Transform> m_RechargePointList;
 
         private TankMovement m_Movement;                        // Reference to tank's movement script, used to disable and enable control.
         private TankShooting m_Shooting;                        // Reference to tank's shooting script, used to disable and enable control.
         private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 		private StateController m_StateController;				// Reference to the StateController for AI tanks
 
-		public void SetupAI(List<Transform> wayPointList)
+		public void SetupAI(List<Transform> wayPointList,List<Transform> RechargePointList)
 		{
 			m_StateController = m_Instance.GetComponent<StateController> ();
-			m_StateController.SetupAI (true, wayPointList);
+			m_StateController.SetupAI (true, wayPointList,RechargePointList);
 
 			m_Shooting = m_Instance.GetComponent<TankShooting> ();
 			m_Shooting.m_PlayerNumber = m_PlayerNumber;

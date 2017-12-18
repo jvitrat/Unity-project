@@ -17,6 +17,7 @@ namespace Complete
 		public GameObject[] m_TankPrefabs;
         public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
 		public List<Transform> wayPointsForAI;
+	public List<Transform> RechargePointsForAI;
         
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -54,7 +55,7 @@ namespace Complete
                 m_Tanks[i].m_Instance =
 					Instantiate(m_TankPrefabs[i], m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
                 m_Tanks[i].m_PlayerNumber = i + 1;
-				m_Tanks[i].SetupAI(wayPointsForAI);
+				m_Tanks[i].SetupAI(wayPointsForAI,RechargePointsForAI);
             }
         }
 
