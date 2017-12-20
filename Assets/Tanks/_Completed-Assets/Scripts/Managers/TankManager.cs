@@ -19,18 +19,20 @@ namespace Complete
         [HideInInspector] public string m_ColoredPlayerText;    // A string that represents the player with their number colored to match their tank.
         [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the tank when it is created.
         [HideInInspector] public int m_Wins;                    // The number of wins this player has so far.
-		[HideInInspector] public List<Transform> m_WayPointList;
+	[HideInInspector] public List<Transform> m_WayPointList;
 	[HideInInspector] public List<Transform> m_RechargePointList;
+	[HideInInspector] public List<Transform> m_activeRechargePoints;
+	[HideInInspector] public bool m_RecoveryDisabled;       //reference that the tank have no station to recharge
 
         private TankMovement m_Movement;                        // Reference to tank's movement script, used to disable and enable control.
         private TankShooting m_Shooting;                        // Reference to tank's shooting script, used to disable and enable control.
         private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 		private StateController m_StateController;				// Reference to the StateController for AI tanks
 
-		public void SetupAI(List<Transform> wayPointList,List<Transform> RechargePointList)
+		public void SetupAI(List<Transform> wayPointList,List<Transform> RechargePointList , List<bool> activeRechargePoints)
 		{
 			m_StateController = m_Instance.GetComponent<StateController> ();
-			m_StateController.SetupAI (true, wayPointList,RechargePointList);
+			m_StateController.SetupAI (true, wayPointList,RechargePointList,activeRechargePoints);
 
 			m_Shooting = m_Instance.GetComponent<TankShooting> ();
 			m_Shooting.m_PlayerNumber = m_PlayerNumber;

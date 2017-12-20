@@ -11,12 +11,13 @@ public class StateController : MonoBehaviour {
     public Transform eyes;
     public State remainState;
 
-
+    [HideInInspector] public bool recoveryDisabled;
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public Complete.TankShooting tankShooting;
     [HideInInspector] public Complete.TankHealth tankHealth;
     [HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public List<Transform> RechargePointList;
+    [HideInInspector] public List<bool> activeRechargePoints;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public int closestRechargePoint;
     [HideInInspector] public Transform chaseTarget;
@@ -30,13 +31,16 @@ public class StateController : MonoBehaviour {
         tankShooting = GetComponent<Complete.TankShooting> ();
 	tankHealth = GetComponent<Complete.TankHealth> ();
         navMeshAgent = GetComponent<NavMeshAgent> ();
+	recoveryDisabled=false;
     }
 
-    public void SetupAI(bool aiActivationFromTankManager, List<Transform> wayPointsFromTankManager,List<Transform> RechargePointsFromTankManager)
-    {
+    public void SetupAI(bool aiActivationFromTankManager, List<Transform> wayPointsFromTankManager,List<Transform> RechargePointsFromTankManager , List<bool> activeRechargePointsFromTankManager)
+    {	
         wayPointList = wayPointsFromTankManager;
 	RechargePointList = RechargePointsFromTankManager;
+	activeRechargePoints = activeRechargePointsFromTankManager;
         aiActive = aiActivationFromTankManager;
+	recoveryDisabled=false;
         if (aiActive) 
         {
             navMeshAgent.enabled = true;

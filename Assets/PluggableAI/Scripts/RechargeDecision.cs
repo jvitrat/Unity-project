@@ -13,7 +13,7 @@ public class RechargeDecision : Decision
 
     private bool Recharge(StateController controller)
     {
-	if(controller.tankHealth.m_CurrentHealth<=30f)         
+	if((controller.tankHealth.m_CurrentHealth<=30f) && (!controller.recoveryDisabled))         
 		return true;
 	else
 		return false;

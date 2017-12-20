@@ -14,10 +14,14 @@ namespace Complete
         public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
         public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
-		public GameObject[] m_TankPrefabs;
+	public GameObject[] m_TankPrefabs;
         public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
-		public List<Transform> wayPointsForAI;
+	//public GameObject[] m_RecoveryPrefabs;
+        //public RecoveryManager[] m_RecoveryPoints;               // A collection of managers for enabling and disabling different aspects of the recovery points.
+	
+	public List<Transform> wayPointsForAI;
 	public List<Transform> RechargePointsForAI;
+	public List<bool> activeRechargePoints;
         
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -33,6 +37,7 @@ namespace Complete
             m_EndWait = new WaitForSeconds (m_EndDelay);
 
             SpawnAllTanks();
+
             SetCameraTargets();
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
@@ -55,10 +60,10 @@ namespace Complete
                 m_Tanks[i].m_Instance =
 					Instantiate(m_TankPrefabs[i], m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
                 m_Tanks[i].m_PlayerNumber = i + 1;
-				m_Tanks[i].SetupAI(wayPointsForAI,RechargePointsForAI);
+				m_Tanks[i].SetupAI(wayPointsForAI,RechargePointsForAI,activeRechargePoints);
             }
         }
-
+ 
 
         private void SetCameraTargets()
         {
@@ -126,6 +131,7 @@ namespace Complete
         {
             // As soon as the round begins playing let the players control the tanks.
             EnableTankControl ();
+	 
 
             // Clear the text from the screen.
             m_MessageText.text = string.Empty;
